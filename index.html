@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Animated Heart - I Love You</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(30, 30, 30, 0.9)), 
+                        url('babe.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Arial", sans-serif;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .heart-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            transform-style: preserve-3d;
+            animation: rotate3d 8s infinite linear;
+        }
+
+        .heart {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .heart-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff0000, #cc0000, #990000);
+            clip-path: path("M150,50 C100,20 50,50 50,100 C50,150 150,250 150,250 C150,250 250,150 250,100 C250,50 200,20 150,50 Z");
+            opacity: 0;
+            animation: drawHeart 3s ease-in-out forwards;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.6), inset 0 0 20px rgba(255, 0, 0, 0.8);
+        }
+
+        .heart-face:nth-child(1) { transform: translateZ(15px); }
+        .heart-face:nth-child(2) { transform: translateZ(-15px) rotateY(180deg); }
+        .heart-face:nth-child(3) { transform: rotateY(90deg) translateZ(15px); }
+        .heart-face:nth-child(4) { transform: rotateY(-90deg) translateZ(15px); }
+        .heart-face:nth-child(5) { transform: rotateX(90deg) translateZ(15px); }
+        .heart-face:nth-child(6) { transform: rotateX(-90deg) translateZ(15px); }
+
+        .message {
+            color: white;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            opacity: 0;
+            animation: fadeInMessage 2s ease-in-out 3.5s forwards;
+            transform: translateY(20px);
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: sparkle 2s infinite;
+        }
+
+        .sparkle:nth-child(1) { top: 20%; left: 30%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 30%; right: 25%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { bottom: 40%; left: 20%; animation-delay: 1s; }
+        .sparkle:nth-child(4) { bottom: 30%; right: 30%; animation-delay: 1.5s; }
+        .sparkle:nth-child(5) { top: 50%; left: 10%; animation-delay: 0.3s; }
+        .sparkle:nth-child(6) { top: 60%; right: 15%; animation-delay: 0.8s; }
+
+        @keyframes drawHeart {
+            0% {
+                opacity: 0;
+                transform: scale(0.1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotate3d {
+            0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+            25% { transform: rotateX(15deg) rotateY(90deg) rotateZ(5deg); }
+            50% { transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg); }
+            75% { transform: rotateX(-15deg) rotateY(270deg) rotateZ(-5deg); }
+            100% { transform: rotateX(0deg) rotateY(360deg) rotateZ(0deg); }
+        }
+
+        @keyframes fadeInMessage {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(254, 9, 177, 0.7);
+            animation: float 6s infinite linear;
+        }
+
+        .floating-heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .floating-heart:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .floating-heart:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .floating-heart:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .floating-heart:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .floating-heart:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .floating-heart:nth-child(7) { left: 70%; animation-delay: 0.5s; }
+        .floating-heart:nth-child(8) { left: 80%; animation-delay: 1.5s; }
+        .floating-heart:nth-child(9) { left: 90%; animation-delay: 2.5s; } 
+
+        @keyframes float {
+            0% {
+                bottom: -50px;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 100vh;
+                opacity: 0;
+                transform: translateX(50px) rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                background-size: contain; /* Adjust the image size to fit the screen */
+                background-position: center top; /* Align the image to the top center */
+            }
+
+            .heart-container {
+                width: 200px; /* Reduce the heart size for smaller screens */
+                height: 200px;
+            }
+
+            .message {
+                font-size: 1.5em; /* Adjust the message font size */
+                padding: 0 10px;
+            }
+
+            .love-message {
+                font-size: 2em; /* Adjust the love message font size */
+            }
+
+            .flowers .flower {
+                width: 30px; /* Reduce flower size */
+                height: 30px;
+            }
+        }
+
+        .love-message {
+            position: absolute;
+            top: 10%;
+            font-size: 3em;
+            font-weight: bold;
+            color: #ff69b4;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255, 105, 180, 0.6);
+            animation: fadeInOut 4s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .flowers {
+            position: absolute;
+            bottom: 5%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .flower {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #ff69b4, #ff1493);
+            border-radius: 50%;
+            animation: growAndDisappear 3s infinite;
+        }
+
+        .flower:nth-child(1) { animation-delay: 0s; }
+        .flower:nth-child(2) { animation-delay: 0.5s; }
+        .flower:nth-child(3) { animation-delay: 1s; }
+        .flower:nth-child(4) { animation-delay: 1.5s; }
+        .flower:nth-child(5) { animation-delay: 2s; }
+
+        @keyframes growAndDisappear {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart-container">
+            <div class="heart">
+                <div class="heart-face"></div>
+                <div class="heart-face"></div>
+                <div class="heart-face"></div>
+                <div class="heart-face"></div>
+                <div class="heart-face"></div>
+                <div class="heart-face"></div>
+            </div>
+            <div class="sparkles">
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+            </div>
+        </div>
+        
+        <div class="message pulse">
+            I love you babe Very much ❤️
+        </div>
+    </div>
+
+    <div class="floating-hearts">
+        <div class="floating-heart">💕</div>
+        <div class="floating-heart">💖</div>
+        <div class="floating-heart">💗</div>
+        <div class="floating-heart">💘</div>
+        <div class="floating-heart">💝</div>
+        <div class="floating-heart">💞</div>
+        <div class="floating-heart">💟</div>
+        <div class="floating-heart">❤️</div>
+        <div class="floating-heart">💕</div>
+    </div>
+
+    <div class="love-message">
+        I love you more than words can say!
+    </div>
+
+    <div class="flowers">
+        <div class="flower"></div>
+        <div class="flower"></div>
+        <div class="flower"></div>
+        <div class="flower"></div>
+        <div class="flower"></div>
+    </div>
+
+    <script>
+        // Add some interactive sparkle effects
+        document.addEventListener("click", function(e) {
+            createSparkle(e.clientX, e.clientY);
+        });
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement("div");
+            sparkle.style.position = "fixed";
+            sparkle.style.left = x + "px";
+            sparkle.style.top = y + "px";
+            sparkle.style.width = "6px";
+            sparkle.style.height = "6px";
+            sparkle.style.background = "#fff";
+            sparkle.style.borderRadius = "50%";
+            sparkle.style.pointerEvents = "none";
+            sparkle.style.zIndex = "1000";
+            sparkle.style.animation = "sparkle 1s ease-out forwards";
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+
+        // Add some random floating hearts periodically
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.innerHTML = "💖";
+            heart.style.position = "fixed";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.bottom = "-50px";
+            heart.style.fontSize = "20px";
+            heart.style.pointerEvents = "none";
+            heart.style.zIndex = "999";
+            heart.style.animation = "float 6s linear forwards";
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }, 2000);
+    </script>
+</body>
+</html>
