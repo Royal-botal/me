@@ -23,7 +23,12 @@
         }
 
         .heart {
-            font-size: 5rem;
+            font-size: 6rem;
+            margin-left: 10%;
+            @media (max-width: 768px) {
+                font-size: 4rem;
+                margin-left: 0;
+            }
             animation: beat 1s infinite;
         }
 
