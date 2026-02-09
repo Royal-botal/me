@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6f2;
+            color: #ff0066;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 50px;
+            font-size: 3em;
+        }
+        .buttons {
+            margin-top: 30px;
+        }
+        button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .yes {
+            background-color: #ff66b2;
+            color: white;
+        }
+        .no {
+            background-color: #ffcccc;
+            color: #ff0066;
+        }
+        .flowers {
+            font-size: 5em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Will you be my Valentine? 💖</h1>
+    <div class="buttons">
+        <button class="yes" onclick="yesClick()">Yes</button>
+        <button class="no" onclick="noClick()">No</button>
+    </div>
+    <div class="flowers">🌸🌹🌷💐🌼</div>
+
+    <script>
+        const noButton = document.querySelector('.no');
+
+        function yesClick() {
+            window.location.href = 'thank_you.html';
+        }
+
+        function noClick() {
+            const currentSize = parseFloat(window.getComputedStyle(noButton).fontSize);
+            noButton.style.fontSize = (currentSize + 2) + 'px';
+        }
+    </script>
+</body>
+</html>
